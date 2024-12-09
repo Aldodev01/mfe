@@ -7,15 +7,12 @@ export default defineConfig({
     pluginReact(),
     pluginModuleFederation({
       name: "store",
-      filename: "remoteEntry.js",
       exposes: {
         "./redux": "./src/redux.tsx",
       },
       shared: {
         react: { singleton: true, eager: true },
         "react-dom": { singleton: true, eager: true },
-        "@reduxjs/toolkit": { singleton: true, eager:true },
-        "react-redux": { singleton: true, eager:true },
       },
     }),
   ],

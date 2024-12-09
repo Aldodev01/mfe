@@ -3,12 +3,25 @@ import { pluginReact } from "@rsbuild/plugin-react";
 import { pluginModuleFederation } from "@module-federation/rsbuild-plugin";
 
 export default defineConfig({
+  server: {
+    compress: true,
+    port: 2000,
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
+      "Access-Control-Allow-Headers":
+        "X-Requested-With, content-type, Authorization",
+        "mode": "no-cors",
+    },
+  },
+  mode: "development",
   plugins: [
     pluginReact(),
     pluginModuleFederation({
+      getPublicPath: "https://mfe-child.netlify.app",
       name: "parent",
       remotes: {
-        child: "child@http://localhost:3000/mf-manifest.json",
+        child: "child@https://mfe-child.netlify.app/mf-manifest.json",
       },
       shared: {
         react: { singleton: true },
@@ -18,7 +31,4 @@ export default defineConfig({
       },
     }),
   ],
-  server: {
-    port: 2000,
-  },
 });

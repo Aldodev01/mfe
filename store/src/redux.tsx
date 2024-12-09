@@ -4,37 +4,37 @@ import { Provider, useSelector, useDispatch } from "react-redux";
 
 // Define the state type
 interface CounterState {
-  count: number;
+  countRX: number;
 }
 
 // Initial state with explicit type
 const initialState: CounterState = {
-  count: 0,
+  countRX: 0,
 };
 
 export const counterSlice = createSlice({
-  name: "counter",
+  name: "counterRX",
   initialState,
   reducers: {
 
-    increment: (state) => {
-      state.count += 1;
+    incrementRX: (state) => {
+      state.countRX += 1;
     },
-    clear: (state) => {
-      state.count = 0;
+    clearRX: (state) => {
+      state.countRX = 0;
     },
   },
 });
 
-const { increment, clear } = counterSlice.actions;
+export const { incrementRX, clearRX } = counterSlice?.actions;
 
 // Define the RootState type
 export type RootState = ReturnType<typeof store.getState>;
 
 // Create store with explicit typing
-const store = configureStore({
+export const store = configureStore({
   reducer: {
-    counter: counterSlice.reducer,
+    counterRX: counterSlice?.reducer,
   },
 });
 
@@ -43,12 +43,12 @@ export type AppDispatch = typeof store.dispatch;
 
 // Custom hook with proper type annotations
 export function useStore() {
-  const count = useSelector((state: RootState) => state.counter.count);
+  const countRX = useSelector((state: RootState) => state.counterRX.countRX);
   const dispatch = useDispatch<AppDispatch>();
   return {
-    count,
-    increment: () => dispatch(increment()),
-    clear: () => dispatch(clear()),
+    countRX,
+    incrementRX: () => dispatch(incrementRX()),
+    clearRX: () => dispatch(clearRX()),
   };
 }
 

@@ -3,6 +3,11 @@ import { pluginReact } from "@rsbuild/plugin-react";
 import { pluginModuleFederation } from "@module-federation/rsbuild-plugin";
 
 export default defineConfig({
+  resolve: {
+    alias: (opts) => {
+      opts['@zustand'] = './src/zustand.tsx';
+    },
+  },
   plugins: [
     pluginReact(),
     pluginModuleFederation({
@@ -10,13 +15,12 @@ export default defineConfig({
       exposes: {
         "./CMPButton": "./src/CMPButton.tsx",
         "./zustand": "./src/zustand.tsx",
+        "./Global": "./src/Global.tsx",
+        "./Recheiver": "./src/Recheiver.tsx",
       },
       shared: {
         react: { singleton: true },
         "react-dom": { singleton: true },
-        // tailwindcss: { singleton: true, eager: true },
-        // "postcss": { singleton: true, eager: true },
-        // "zustand": { singleton: true, eager: true },
       },
     }),
   ],
