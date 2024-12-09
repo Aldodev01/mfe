@@ -9,16 +9,14 @@ export default defineConfig({
       name: "child",
       exposes: {
         "./CMPButton": "./src/CMPButton.tsx",
-      },
-      remotes: {
-        parent: "parent@http://localhost:2000/mf-manifest.json",
-        store: "store@http://localhost:4000/mf-manifest.json",
+        "./zustand": "./src/zustand.tsx",
       },
       shared: {
         react: { singleton: true },
         "react-dom": { singleton: true },
-        tailwindcss: { singleton: true, eager: true },
-        "postcss": { singleton: true, eager: true },
+        // tailwindcss: { singleton: true, eager: true },
+        // "postcss": { singleton: true, eager: true },
+        // "zustand": { singleton: true, eager: true },
       },
     }),
   ],
